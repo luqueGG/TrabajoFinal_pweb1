@@ -23,3 +23,7 @@ my @pages;
 while (my @row = $sth->fetchrow_array) {
     push @pages, { id => $row[0], name => $row[1] };
 }
+print $cgi->header('application/json');
+print encode_json(\@pages);
+$sth->finish;
+$dbh->disconnect;
