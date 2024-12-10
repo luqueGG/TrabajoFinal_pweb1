@@ -42,12 +42,14 @@ if ($cgi->param('submit')) {
 </head>
 <body>
     <h1>Editar Página</h1>
-    <form method="post">
+    <form method="post" action="/cgi-bin/editarPag.pl">
+        <input type="hidden" name="id" value="$page_id">
         Nombre de la página: <input type="text" name="page_name" value="$page_name"><br>
         Contenido (Markdown):<br>
         <textarea name="content" rows="10" cols="50">$content</textarea><br>
         <input type="submit" name="submit" value="Actualizar">
     </form>
+
     <a href='/index.html'>Cancelar</a>
 </body>
 </html>
