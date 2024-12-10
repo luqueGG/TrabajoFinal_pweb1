@@ -17,7 +17,15 @@
     <p>Alumno: Fernando Gerson Luque Guevara<br>Curso: Programacion Web I Teoria<br></p>
     <script>
         function cargarListadoDePaginas() {
-            
+            fetch('/cgi-bin/get_pages.pl')  // Llamamos al script Perl para obtener las páginas
+                .then(response => response.json())
+                .then(data => {
+                    
+                })
+                .catch(error => {
+                    console.error("Error al cargar las paginas:", error);
+                }
+            );
         }
     </script>
 </body>
