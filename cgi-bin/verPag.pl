@@ -19,3 +19,8 @@ my $dbh = DBI->connect($dsn, $db_user, $db_password, {
 }) or die "No se pudo conectar a la base de datos: $DBI::errstr";
 my $sth = $dbh->prepare("SELECT name, content FROM pages WHERE id = ?");
 $sth->execute($page_id);
+my ($page_name, $content) = $sth->fetchrow_array;
+
+print $cgi->header('text/html');
+print "<h1>$page_name</h1>";
+print "<pre>$content</pre>";
