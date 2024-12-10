@@ -17,3 +17,4 @@ my $dbh = DBI->connect($dsn, $db_user, $db_password, {
 
 my $sth = $dbh->prepare("DELETE FROM pages WHERE id = ?");
 $sth->execute($page_id);
+print $cgi->redirect("/index.html");
