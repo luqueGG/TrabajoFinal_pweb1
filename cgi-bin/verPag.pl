@@ -24,3 +24,4 @@ my ($page_name, $content) = $sth->fetchrow_array;
 print $cgi->header('text/html');
 print "<h1>$page_name</h1>";
 print "<pre>$content</pre>";
+$dbh->disconnect;
