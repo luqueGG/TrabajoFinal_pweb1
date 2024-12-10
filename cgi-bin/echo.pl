@@ -27,3 +27,4 @@ if ($cgi->param('submit')) {
     print $cgi->header('text/html');
     print "<h1>Pagina creada con exito</h1>";
     print "<a href='/index.html'>Regresar al indice</a>";
+$dbh->disconnect;
