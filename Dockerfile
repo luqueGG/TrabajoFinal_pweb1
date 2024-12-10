@@ -1,10 +1,16 @@
 FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Instalación de dependencias
 RUN apt-get update && \
-    apt-get install -y apache2 perl libapache2-mod-perl2 libcgi-pm-perl libdbi-perl mariadb-client dos2unix libjson-perl && \
+    apt-get install -y apache2 perl libapache2-mod-perl2 libcgi-pm-perl libdbi-perl mariadb-client dos2unix libjson-perl \
+    curl make gcc && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# Instalación de cpan y Text::Markdown
+RUN curl -L http://cpanmin.us | perl - App::cpanminus && \
+    cpanm Text::Markdown
 
 RUN a2enmod cgi && \
     echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
