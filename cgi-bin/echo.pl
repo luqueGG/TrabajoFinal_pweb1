@@ -16,3 +16,14 @@ my $dbh = DBI->connect($dsn, $db_user, $db_password, {
     RaiseError => 1,
     AutoCommit => 1,
 }) or die "No se pudo conectar a la base de datos: $DBI::errstr";
+if ($cgi->param('submit')) {
+    my $page_name = $cgi->param('page_name');
+    my $content = $cgi->param('content');
+
+    # Insertar los datos en la base de datos
+    my $sth = $dbh->prepare("INSERT INTO pages (name, content) VALUES (?, ?)");
+    $sth->execute($page_name, $content);
+
+    print $cgi->header('text/html');
+    print "<h1>Pagina creada con exito</h1>";
+    print "<a href='/index.html'>Regresar al indice</a>";
