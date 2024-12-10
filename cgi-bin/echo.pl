@@ -27,5 +27,14 @@ if ($cgi->param('submit')) {
     print $cgi->header('text/html');
     print "<h1>Pagina creada con exito</h1>";
     print "<a href='/index.html'>Regresar al indice</a>";
+} else {
+    print $cgi->header('text/html');
+    print "<h1>Crear Nueva Pagina</h1>";
+    print "<form method='post'>";
+    print "Nombre de la pagina: <input type='text' name='page_name'><br>";
+    print "Contenido (Markdown):<br>";
+    print "<textarea name='content' rows='10' cols='50'></textarea><br>";
+    print "<input type='submit' name='submit' value='Guardar'>";
+    print "</form>";
 }
 $dbh->disconnect;
