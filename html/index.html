@@ -16,24 +16,27 @@
     <hr>
     <p>Alumno: Fernando Gerson Luque Guevara<br>Curso: Programacion Web I Teoria<br></p>
     <script>
-        function cargarListadoDePaginas() {
-            fetch('/cgi-bin/get_pages.pl')  // Llamamos al script Perl para obtener las paginas
-                .then(response => response.json())
-                .then(data => {
-                    const listado = document.getElementById('listado');
-                    listado.innerHTML = ''; 
-                    data.forEach(page => {
-                        const li = document.createElement('li');
-                        li.innerHTML = `<a href="/cgi-bin/verPag.pl?id=${page.id}">${page.name}</a> 
-                                        <a href="/cgi-bin/borrarPag.pl?id=${page.id}" style="color:red; padding-left: 10px; textdecoration:none;">X</a>`;
-                        listado.appendChild(li);
+            function cargarListadoDePaginas() {
+                fetch('/cgi-bin/get_pages.pl')  // Llamamos al script Perl para obtener las paginas
+                    .then(response => response.json())
+                    .then(data => {
+                        const listado = document.getElementById('listado');
+                        listado.innerHTML = '';
+                        data.forEach(page => {
+                            const li = document.createElement('li');
+                            li.innerHTML = `
+                    <a href="/cgi-bin/verPag.pl?id=${page.id}">${page.name}</a> 
+                    <a href="/cgi-bin/borrarPag.pl?id=${page.id}" style="color:red; padding-left: 10px; text-decoration:none;">X</a>
+                    <a href="/cgi-bin/editarPag.pl?id=${page.id}" style="color:blue; padding-left: 10px; text-decoration:none;">E</a>
+                `;
+                            listado.appendChild(li);
+                        });
+                    })
+                    .catch(error => {
+                        console.error("Error al cargar las paginas:", error);
                     });
-                })
-                .catch(error => {
-                    console.error("Error al cargar las paginas:", error);
-                }
-            );
-        }
+            }
+        
         window.onload = cargarListadoDePaginas; // lo llamamos
     </script>
 </body>
