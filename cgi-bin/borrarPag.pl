@@ -14,3 +14,6 @@ my $dbh = DBI->connect($dsn, $db_user, $db_password, {
     RaiseError => 1,
     AutoCommit => 1,
 }) or die "No se pudo conectar a la base de datos: $DBI::errstr";
+
+my $sth = $dbh->prepare("DELETE FROM pages WHERE id = ?");
+$sth->execute($page_id);
